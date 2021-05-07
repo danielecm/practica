@@ -10,30 +10,51 @@ los datos en un array
 muestre los nombres introducidos por pantalla
 */
 
-let miBoton = document.querySelector("#pedir_datos");
-let miBoton2 = document.querySelector("#mostrar");
-var box_dashed = document.querySelector(".dashed");
-box_dashed.style.display = "none";
+    let miBoton = document.querySelector("#pedir_datos");
+    let miBoton2 = document.querySelector("#mostrar");
+    var box_dashed = document.querySelector(".dashed");
 
-miBoton.onclick = pedir;
-miBoton2.onclick = mostrar;
+    miBoton.onclick = pedir;
 
-var datos = [];
+    var data_user = [];
 
-function pedir(datos){
-    var nombre = prompt("Mete tu Nombre");
-    var apellido = prompt("Mete tu Apellido");
-    datos = [nombre, apellido];
-    alert("Datos enviados "+nombre+' '+apellido);
-    console.log([nombre, apellido]);
-}
+    function pedir(){
+        
+        miBoton2.disabled = false;
+        
+        var nombre = prompt("Mete tu Nombre");
+        var apellido = prompt("Mete tu Apellido");
 
-function mostrar(){
-    box_dashed.style.display = "block";
+        alert("Datos enviados "+nombre+' '+apellido);
+        data_user.push(nombre,apellido);
+    }
+    
 
-    var p_nombre = document.querySelector("#dnombre span");
-    var p_apellidos = document.querySelector("#dapellidos span");
+    miBoton2.addEventListener('click',()=>{
 
-    p_nombre.innerHTML = datos;
-    p_apellidos.innerHTML = datos;
-};
+       
+       for(let i = 0; i < data_user.length; i++){
+            let data = `
+            
+            <div class="box dashed">
+            <h3>Informacion del usuario</h3>
+            <hr>
+            <p id="dnombre">
+                <span>Nombre:${data_user[i++]}</span>
+            </p>
+            <p id="dapellido">
+                <span>Apellidos:${data_user[i++]}</span>
+            </p>
+        </div>
+            
+            `;
+             let alldata = document.querySelector("#alldata");
+            
+            alldata.innerHTML = data;
+
+        }          
+           
+        console.log(data_user);
+           
+    });
+  
